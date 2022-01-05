@@ -1,0 +1,26 @@
+{
+  "name": "cualit-backend",
+  "version": "1.0.0",
+  "description": "Node.js Rest Apis with Express, Sequelize & MySQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matprogrammer/cualit-backend.git"
+  },
+  "author": "mauroaguiar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matprogrammer/cualit-backend/issues"
+  },
+  "homepage": "https://github.com/matprogrammer/cualit-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.5"
+  }
+}

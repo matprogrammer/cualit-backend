@@ -1,13 +1,16 @@
+
+const jwt = require("jsonwebtoken");
 const db = require("../models/index");
+
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Tutorial
 exports.create = (req, res) => {
     const tutorial = {
       title: req.body.title,
       description: req.body.description,
-      published: req.body.published ? req.body.published : false
+      published: req.body.published ? req.body.published : false,
+      video: req.body.video
     };
   
     Tutorial.create(tutorial)
@@ -22,14 +25,22 @@ exports.create = (req, res) => {
       });
   };
 
-
   exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  
+
     Tutorial.findAll({ where: condition })
       .then(data => {
-        res.send(data);
+        const payload = {
+          check:  true
+        };
+        const token = jwt.sign(payload, process.env.JWT_KEY, {
+          expiresIn: 1440
+         });
+        res.send({
+          data, 
+          token
+        });
       })
       .catch(err => {
         res.status(500).send({

@@ -1,19 +1,20 @@
 module.exports = app => {
     const tutorials = require("../controllers/tutorialsController");
+    const auth = require("../middleware/auth");
+
+    const router = require("express").Router();
   
-    var router = require("express").Router();
-  
-    router.post("/", tutorials.create);
+    router.post("/", auth, tutorials.create);
   
     router.get("/", tutorials.findAll);
   
     router.get("/:id", tutorials.findOne);
   
-    router.put("/:id", tutorials.update);
+    router.put("/:id", auth, tutorials.update);
   
-    router.delete("/:id", tutorials.delete);
+    router.delete("/:id", auth, tutorials.delete);
   
-    router.delete("/", tutorials.deleteAll);
+    router.delete("/", auth, tutorials.deleteAll);
   
     app.use('/api/tutorials', router);
   };
